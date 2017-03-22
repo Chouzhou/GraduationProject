@@ -1,12 +1,11 @@
 <template>
     <Carousel
-        :autoplay="setting.autoplay"
+        :autoplay="true"
         :autoplay-speed="setting.autoplaySpeed"
         :dots="setting.dots"
         :trigger="setting.trigger"
         :arrow="setting.arrow"
-        class="carousel"
-        autoplay="true">
+        class="carousel">
         <Carousel-item>
             <div class="demo-carousel">1</div>
         </Carousel-item>
