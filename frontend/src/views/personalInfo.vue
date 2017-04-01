@@ -97,7 +97,7 @@
 .container{
     position: relative;
     top: 50px;
-    left: 650px;
+    left: 350px;
     width: 600px;
 }
 </style>

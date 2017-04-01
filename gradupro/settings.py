@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for gradupro project.
 
@@ -37,17 +38,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'backend'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# rest_framework设置
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser','rest_framework.permissions.IsAuthenticatedOrReadOnly',),
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (  
+        'rest_framework.authentication.BasicAuthentication',  
+        'rest_framework.authentication.SessionAuthentication',  
+    ),
+}
 
 ROOT_URLCONF = 'gradupro.urls'
 
@@ -75,11 +92,26 @@ WSGI_APPLICATION = 'gradupro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'gradupro',
+        'USER': 'root',
+        'PASSWORD': 'zsw19941202',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
-
+# 更改默认加机密方式
+# PASSWORD_HASHERS = (  
+  
+#     'myproject.hashers.MyMD5PasswordHasher',  
+#     'django.contrib.auth.hashers.MD5PasswordHasher',  
+#     'django.contrib.auth.hashers.PBKDF2PasswordHasher',  
+#     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',  
+#     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',  
+#     'django.contrib.auth.hashers.BCryptPasswordHasher',  
+#     'django.contrib.auth.hashers.SHA1PasswordHasher',  
+#     'django.contrib.auth.hashers.CryptPasswordHasher',  
+# ) 
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -103,9 +135,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
