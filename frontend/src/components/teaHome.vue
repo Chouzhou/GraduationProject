@@ -6,7 +6,7 @@
                 <div class="layout-nav">
                     <Menu-item name="1" class="titleDirection" @click.native="title = '首页'" v-if="user.user_id">
                         <Icon type="home"></Icon>
-                        <router-link to="/student/home" class="routerfont">首页</router-link>
+                        <router-link to="/home" class="routerfont">首页</router-link>
                     </Menu-item>
                     <Menu-item name="2" @click.native="learnAndTraining()"  v-if="user.user_id" class="titleDirection">
                         <Icon type="ios-book"></Icon>
@@ -14,7 +14,7 @@
                     </Menu-item>
                     <Menu-item name="3" @click.native="homework()"  v-if="user.user_id" class="titleDirection">
                         <Icon type="ios-analytics"></Icon>
-                        <router-link to="/student/homework" class="routerfont">作业</router-link>
+                        <router-link to="/homework" class="routerfont">作业</router-link>
                     </Menu-item>
                     <Submenu name="4" v-if="user.user_id" class="titleDirection">
                         <template slot="title">
@@ -22,7 +22,7 @@
                         </template>
                             <Menu-item name="4-1" @click.native="title == '个人信息'">
                                 <Icon type="ios-information"></Icon>
-                                <router-link to="/student/personalInfo">个人信息</router-link>
+                                <router-link to="/personalInfo">个人信息</router-link>
                             </Menu-item>
                             <Menu-item name="4-2" @click.native="personalInfo = true"><Icon type="edit"></Icon>修改密码</Menu-item>
                             <Menu-item name="4-2" @click.native="quit"><Icon type="log-out"></Icon>退出登录</Menu-item>
@@ -146,8 +146,7 @@
                         this.user = res.data.results[0];
                         if (this.userInfo.user_id == this.user.user_id && this.userInfo.password == this.user.user_password) {
                             this.$Message.info('登录成功');
-                            // 如果role为教师则主页则是/teacher/home,反之/student/home
-                            this.$router.push('/student/home');
+                            this.$router.push('/home');
                         }else{
                             this.user = []
                             alert('登录失败请重新登录');

@@ -21,7 +21,7 @@
         </div>
         <p v-else>还未有作业</p>
         <!--写作业弹窗-->
-        <Modal  
+        <Modal
             title="写作业"
             :value.sync="submitModel"
             class-name="vertical-center-modal"
