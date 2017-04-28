@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}所点击课程名{% endblock %}
+{% block content %}
+<!--视频播放器-->
+    <div style="position: relative;left: 370px;width: 60%;">
+        <video class="responsive-video" id="myVideo" src="{{ videoes.0.videoSrc }}" type="video/mp4" controls>
+        </video>
+    </div>
+    <!--播放列表-->
+    <div style="position: relative;bottom: 10px;left: 370px;width: 60%;">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>{{ courseName }}</h4></li>
+            {% for video in videoes %}
+            <li class="collection-item">
+                <div>
+                    {{ video.videoName }}
+                    <input onclick="nextVideo('{{ video.videoSrc }}')" class="secondary-content" value="播放" type="button" />
+                    <i class="material-icons">send</i>
+                </div>
+            </li> 
+            {% endfor %}
+        </ul>
+    </div>
+  <!--<style type="text/css">
+
+  </style>-->
+  <script>
+        var myVideo = document.getElementById('myVideo')//获取video元素
+            ,tol = 0 //总时长
+        ;
+        myVideo.addEventListener("loadedmetadata", function(){
+            tol = myVideo.duration;//获取总时长
+            console.log(tol);
+        });
+
+        //播放
+        function play(){ 
+            myVideo.play();
+        }
+
+        //暂停
+        function pause(){ 
+            myVideo.pause();
+        }
+        //播放时间点更新时
+        myVideo.addEventListener("timeupdate", function(){
+            var currentTime = myVideo.currentTime;//获取当前播放时间
+            console.log(currentTime);//在调试器中打印
+            // 获取学习时长
+            $.ajax({
+                type:"POST" ,
+                url:"/student/studyTime/",
+                data:{currentTime : currentTime, csrfmiddlewaretoken: '{{ csrf_token }}'},
+                cache: false,
+                success: function(result){
+                    if (result==1)
+                    {
+                        console.log('1111')
+                    }
+                    else
+                    {
+                        console.log('00000')
+                    }
+                }
+            })
+        // 间隔时间直接播放下一视频
+        });
+        // 播放选定视频
+        function nextVideo(src){
+            var selectVideo = document.getElementById('selectVideo'); 
+            // selectVideo.src = videoSrc.value;
+            myVideo.src = src;
+            myVideo.load();
+            console.log(myVideo.source.src);
+        }
+    </script>
+{% endblock %}

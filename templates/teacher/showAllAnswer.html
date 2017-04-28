@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}作业{% endblock %}
+{% block content %}
+    <!--卡片显示区域-->
+    {% for answer in answers %}
+    <div class="row" style="width: 50%; float:left; margin-left:23%; margin-top:6%; ">
+          <ul class="collection with-header">
+            <li class="collection-header"><h4>{{ answer.task }}所有学生作业</h4></li>
+            <li class="collection-item">
+              <div>
+                {{ answer.studentDo }}
+                <a href="{% url 'answerDetail' answer.id %}" class="btn-flat" style="margin-left:700px;">查看</a>
+                <form style="margin-left:750px;" method="post" action="/teacher/submitGrade/{{ answer.id }}/">
+                {% csrf_token %}
+                    <input id="email" type="text" style="width:20px; margin-top:-20px;" name="grade">
+                    <button class="btn-flat" name="action">                   
+                    打分</button>
+                </form>                             
+              </div>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}所点击课程名{% endblock %}
+{% block content %}
+    <div class="row" style="position:relative;width:70%;left:300px;top:100px;">
+        <form class="col s12" action="/student/doTask_html/{{ task.id }}/" method="post">
+        {% csrf_token %}
+            <p style="position: relative;left: 50px;">{{ task.taskName }}</p>
+            <p style="position: relative;left: 50px;">{{ task.taskDesc }}</p>
+            <div class="row">
+                <div class="input-field col s6">
+                <i class="tiny material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea" name="taskContent" value="{{ answer }}"></textarea>
+                <label for="icon_prefix2">填写作业</label>
+                </div>
+            </div>
+            <div class="card-action">
+                    <button class="btn waves-effect waves-light" type="submit" name="action"  style="left: 555px;">
+                            提交
+                    </button>
+            </div>
+        </form>
+    </div>
+  <!--<style type="text/css">
+
+  </style>-->
+{% endblock %}

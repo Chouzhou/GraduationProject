@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}作业{% endblock %}
+{% block content %}
+    <!--卡片显示区域-->
+    {% for task in tasks %}
+    <div class="row" style="position: relative;width: 15%; float:left; margin-left:2.5%; margin-top:2.5%; ">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{ task.taskName }}</span>
+              <p>{{ task.taskDesc }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url 'doTask_html' task.id%}">写作业</a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+  <!--<style type="text/css">
+
+  </style>-->
+{% endblock %}

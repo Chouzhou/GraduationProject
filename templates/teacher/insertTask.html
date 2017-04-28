@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}发布作业{% endblock %}
+{% block content %}
+<div class="container" style="margin-left:650px; margin-top:200px;">
+    <div class="section col s12 m9 l10">
+        <div class="row">
+            <form class="col s12" method="post" action='/teacher/createTask/'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="username" type="text" class="validate" length="30" name="taskname">
+                        <label for="last_name" class="active">作业题目</label>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="input-field col s6">
+                        <i class="mdi-editor-mode-edit prefix"></i>
+                        <textarea id="icon_prefix2" class="materialize-textarea" length="120" name="describe"></textarea>
+                        <label for="icon_prefix2" class="active">作业简述</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">发布
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </form>
+            {% if info %}
+                <p>{{ info }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

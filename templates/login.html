@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>登录</title>
+
+  <!-- CSS  -->
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style type="text/css">
+    body{
+        background:grey; 
+    }
+  </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col s6 m3">
+          <div class="card blue-grey darken-1"  style="left: 1200px;top:400px;">
+            <div class="card-content white-text">
+              <span class="card-title">培训系统</span>
+              <!--登录表单-->
+                <form method="post" action="/account/login/">
+                    {% csrf_token %}
+                    <div class="row">                              
+                        <div class="input-field col s12">
+                            <input id="last_name" type="text" class="validate" name="username">
+                            <label for="last_name">用户名</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate" name="password">
+                            <label for="password">密码</label>
+                        </div>
+                    </div>             
+                    <div class="card-action">
+                    <button class="btn waves-effect waves-light" type="submit" name="action"  style="right: -300px;">
+                            登录
+                        </button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+  </body>
+</html>
